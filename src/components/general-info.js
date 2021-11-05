@@ -4,60 +4,61 @@ class GeneralInfo extends React.Component {
     constructor() {
         super();
         this.state = {
-            firstName: 'Vladislav',
-            secondName: 'Kuznetsov',
-            title: 'Front End Developer',
-            email: 'example@gmail.com',
+            firstName: 'Vl',
+            lastName: 'Ku',
+            title: 'asddd',
+            email: 'dddsa@gmail.com',
             editing: false,
         }
-        this.handleEdit = this.handleEdit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleEditRequest = this.handleEditRequest.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    handleEdit() {
-        this.setState({
-            editing: !this.state.editing,
-        });
     }
     handleChange(e) {
         const name = e.target.name;
+        const value = e.target.value;
         this.setState({
-            [name]: e.target.value,
+            [name]: value,
+        })
+    }
+
+    handleEditRequest() {
+        this.setState({
+            editing: !this.state.editing
         });
     }
     handleSubmit(e) {
         e.preventDefault();
         this.setState({
-            editing: !this.state.editing,
+            editing: !this.state.editing
         });
     }
     render() {
-        const { firstName, secondName, title, email, editing } = this.state;
+        const {firstName, lastName, title, email, editing} = this.state;
         return (
             <div>
-                {editing
+                {editing 
                 ? <form onSubmit={this.handleSubmit}>
-                    <label for="firstName"></label>
-                    <input onChange={this.handleChange} type="text" name="firstName" value={firstName}></input>
-                    <label for="secondName"></label>
-                    <input onChange={this.handleChange} type="text" name="secondtName" value={secondName}></input>
-                    <label for="title"></label>
-                    <input onChange={this.handleChange} type="text" name="title" value={title}></input>
-                    <label for="email"></label>
-                    <input onChange={this.handleChange} type="text" name="email" value={email}></input>
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" value={firstName} onChange={this.handleChange}></input>
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" value={lastName} onChange={this.handleChange}></input>
+                    <label for="title">Job Title</label>
+                    <input type="text" id="title" name="title" value={title} onChange={this.handleChange}></input>
+                    <label for="email">Email</label>
+                    <input type="text" id="email" name="email" value={email} onChange={this.handleChange}></input>
                     <input type="submit"></input>
                 </form>
-                : <div><h2>{firstName + ' ' + secondName}</h2>
-                  <p>{title}</p>
-                  <p>{email}</p>
-                  <button onClick={this.handleEdit}>Edit</button>
-                  </div>
-                }
+            : <div>
+                <h2>{firstName + ' ' + lastName}</h2>
+                <p>{title}</p>
+                <p>{email}</p>
+                <button onClick={this.handleEditRequest}>edit</button>
+                </div>}
             </div>
+            
         )
     }
 }
-
 
 export default GeneralInfo
