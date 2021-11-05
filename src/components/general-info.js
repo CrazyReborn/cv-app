@@ -4,10 +4,10 @@ class GeneralInfo extends React.Component {
     constructor() {
         super();
         this.state = {
-            firstName: 'Vl',
-            lastName: 'Ku',
-            title: 'asddd',
-            email: 'dddsa@gmail.com',
+            firstName: 'defaultName',
+            lastName: 'defaultSecondName',
+            title: 'default title',
+            email: 'example@gmail.com',
             editing: false,
         }
         this.handleChange = this.handleChange.bind(this);
@@ -36,9 +36,9 @@ class GeneralInfo extends React.Component {
     render() {
         const {firstName, lastName, title, email, editing} = this.state;
         return (
-            <div>
+            <div className="geranalInfo">
                 {editing 
-                ? <form onSubmit={this.handleSubmit}>
+                ? <form className="geranalInfo" onSubmit={this.handleSubmit}>
                     <label for="firstName">First Name</label>
                     <input type="text" id="firstName" name="firstName" value={firstName} onChange={this.handleChange}></input>
                     <label for="lastName">Last Name</label>
