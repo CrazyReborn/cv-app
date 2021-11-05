@@ -1,9 +1,14 @@
 import GeneralInfo from "./components/general-info";
+import Education from "./components/education";
 import './App.css'
 
 function App() {
   return (
-    <GeneralInfo />
+    <div>
+      <GeneralInfo />
+      <Education />
+    </div>
+    
   );
 }
 
