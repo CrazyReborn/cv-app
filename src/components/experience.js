@@ -74,7 +74,7 @@ class Experience extends React.Component {
         const { all, addNew } = this.state;
         const {currentStartYear, currentEndYear, currentCompanyName, currentJobTitle, currentMainTasks } = this.state;
         return (
-            <div>
+            <div className="experience">
                 <h2>Work Experience</h2>
                 {all.map((job) => {
                     return (

@@ -1,5 +1,37 @@
+html{
+    margin: 0;
+    padding: 0;
+}
+
+.main-container {
+    padding: 2%;
+    margin: 2% 25%;
+    background-color: #F4F4F4;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: fit-content;
+    min-height: 970px;
+    color:white;
+}
+
 .geranalInfo {
     display: flex;
     flex-direction: column;
-    width: max-content;
+    background-color: #FF9D66;
+    padding: 1% 2%;
+}
+
+.experience {
+    display: flex;
+    flex-direction: column;
+    background-color: #FF9D66;
+    padding: 1% 2%;
+}
+
+.education {
+    display: flex;
+    flex-direction: column;
+    background-color: #FF9D66;
+    padding: 1% 2%;
 }

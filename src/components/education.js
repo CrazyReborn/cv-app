@@ -64,7 +64,7 @@ class Education extends React.Component {
         const { all, addNew } = this.state;
         const {currentStartYear, currentEndYear, currentUniName, currentTitle } = this.state;
         return (
-            <div>
+            <div className="education">
                 <h2>Education</h2>
                 {all.map((edu) => {
                     return (
