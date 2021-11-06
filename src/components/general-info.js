@@ -39,13 +39,13 @@ class GeneralInfo extends React.Component {
             <div className="geranalInfo">
                 {editing 
                 ? <form className="geranalInfo" onSubmit={this.handleSubmit}>
-                    <label for="firstName">First Name</label>
+                    <label htmlFor="firstName">First Name</label>
                     <input type="text" id="firstName" name="firstName" value={firstName} onChange={this.handleChange}></input>
-                    <label for="lastName">Last Name</label>
+                    <label htmlFor="lastName">Last Name</label>
                     <input type="text" id="lastName" name="lastName" value={lastName} onChange={this.handleChange}></input>
-                    <label for="title">Job Title</label>
+                    <label htmlFor="title">Job Title</label>
                     <input type="text" id="title" name="title" value={title} onChange={this.handleChange}></input>
-                    <label for="email">Email</label>
+                    <label htmlFor="email">Email</label>
                     <input type="text" id="email" name="email" value={email} onChange={this.handleChange}></input>
                     <input type="submit"></input>
                 </form>
