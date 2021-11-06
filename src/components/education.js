@@ -62,10 +62,10 @@ class Education extends React.Component {
         const {currentStartYear, currentSEndYear, currentSUniName } = this.state;
         return (
             <div>
+                <h2>Education</h2>
                 {all.map((edu) => {
                     return (
                         <div key={edu.id}>
-                            <h2>Education</h2>
                             <p>{edu.startYear} - {edu.endYear}</p>
                             <p>{edu.uniName}</p>
                             <button onClick={() => this.handleDelete(edu.id)}>Delete this entry</button>
@@ -84,7 +84,6 @@ class Education extends React.Component {
                     <input type="submit"></input>
                     </form>
                     }
-            
         </div>
         )
     }

@@ -1,5 +1,6 @@
 import GeneralInfo from "./components/general-info";
 import Education from "./components/education";
+import Experience from "./components/experience";
 import './App.css'
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <div>
       <GeneralInfo />
       <Education />
+      <Experience />
     </div>
     
   );
