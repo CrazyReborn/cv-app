@@ -6,7 +6,14 @@ class Experience extends React.Component {
         super();
         this.state = {
             addNew: false,
-            all: [],
+            all: [{
+                startYear: '2020',
+                endYear: '2021',
+                companyName: 'Sprite',
+                jobTitle: 'sommelier',
+                mainTasks: 'Drinking sprite',
+                id: uniqid(),
+            }],
             currentStartYear: '',
             currentEndYear: '',
             currentCompanyName: '',

@@ -7,11 +7,12 @@ class Education extends React.Component {
         this.state = {
             addNew: false,
             all: [{
-                startYear: '2012', endYear: '2018', uniName: 'Vitebsk',
+                startYear: '2012', endYear: '2018', uniName: 'Vitebsk', title: 'doc',
             id: uniqid()}],
             currentStartYear: '',
             currentEndYear: '',
             currentUniName: '',
+            currentTitle: '',
             currentId: uniqid(),
         }
         this.handleDelete = this.handleDelete.bind(this);
@@ -46,6 +47,7 @@ class Education extends React.Component {
             startYear: this.state.currentStartYear,
             endYear: this.state.currentEndYear,
             uniName: this.state.currentUniName,
+            title: this.state.currentTitle,
             id: this.state.currentId,
         }
         this.setState({
@@ -54,20 +56,22 @@ class Education extends React.Component {
             currentStartYear: '',
             currentEndYear: '',
             currentUniName: '',
+            currentTitle: '',
             currentId: uniqid(),
         }, console.log(this.state.all));
     }
     render() {
         const { all, addNew } = this.state;
-        const {currentStartYear, currentSEndYear, currentSUniName } = this.state;
+        const {currentStartYear, currentEndYear, currentUniName, currentTitle } = this.state;
         return (
             <div>
                 <h2>Education</h2>
                 {all.map((edu) => {
                     return (
                         <div key={edu.id}>
-                            <p>{edu.startYear} - {edu.endYear}</p>
-                            <p>{edu.uniName}</p>
+                            <h3>{edu.uniName}</h3>
+                            <p>Title: {edu.title}</p>
+                            <p>From {edu.startYear} to {edu.endYear}</p>
                             <button onClick={() => this.handleDelete(edu.id)}>Delete this entry</button>
                         </div>
                     )
@@ -78,9 +82,11 @@ class Education extends React.Component {
                     <label htmlFor="startYear">Start Year</label>
                     <input onChange={this.handleChange} id="startYear" name="currentStartYear" type="number" min="1960" max="2021" step="1" value={currentStartYear}></input>
                     <label htmlFor="endYear">End Year</label>
-                    <input onChange={this.handleChange} id="endYear" name="currentEndYear" type="number" min="1960" max="2021" step="1" value={currentSEndYear}></input>
+                    <input onChange={this.handleChange} id="endYear" name="currentEndYear" type="number" min="1960" max="2021" step="1" value={currentEndYear}></input>
                     <label htmlFor="uniName">School Name</label>
-                    <input onChange={this.handleChange} type="text" name="currentUniName" id="uniName" value={currentSUniName}></input>
+                    <input onChange={this.handleChange} type="text" name="currentUniName" id="uniName" value={currentUniName}></input>
+                    <label htmlFor="title">Title</label>
+                    <input onChange={this.handleChange} type="text" name="currentTitle" id="title" value={currentTitle}></input>
                     <input type="submit"></input>
                     </form>
                     }

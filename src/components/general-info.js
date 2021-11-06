@@ -37,6 +37,7 @@ class GeneralInfo extends React.Component {
         const {firstName, lastName, title, email, editing} = this.state;
         return (
             <div className="geranalInfo">
+                <h2>GeneralInfo</h2>
                 {editing 
                 ? <form className="geranalInfo" onSubmit={this.handleSubmit}>
                     <label htmlFor="firstName">First Name</label>
