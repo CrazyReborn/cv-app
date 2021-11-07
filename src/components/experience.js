@@ -1,5 +1,6 @@
 import React from "react";
 import uniqid from "uniqid";
+import ExperienceEntry from "./exp-entry";
 
 class Experience extends React.Component {
     constructor() {
@@ -25,6 +26,8 @@ class Experience extends React.Component {
         this.handleAddEducationEntry = this.handleAddEducationEntry.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleResubmit = this.handleResubmit.bind(this);
+        this.handleResubmit = this.handleResubmit.bind(this);
     }
 
     handleDelete(id) {
@@ -70,6 +73,15 @@ class Experience extends React.Component {
             currentId: uniqid(),
         }, console.log(this.state.all));
     }
+    handleResubmit(e, job, changedState) {
+        e.preventDefault();
+        const prevAll = this.state.all.slice();
+        const index = this.state.all.indexOf(job);
+        prevAll[index] = changedState;
+        this.setState({
+            all: prevAll,
+        });
+    }
     render() {
         const { all, addNew } = this.state;
         const {currentStartYear, currentEndYear, currentCompanyName, currentJobTitle, currentMainTasks } = this.state;
@@ -79,12 +91,8 @@ class Experience extends React.Component {
                 {all.map((job) => {
                     return (
                         <div key={job.id}>
-                            <h3>{job.companyName}</h3>
-                            <p>From {job.startYear} to {job.endYear}</p>
-                            <p>Position: {job.jobTitle}</p>
-                            <p>Responsibilities: {job.mainTasks}</p>
-                            <button onClick={() => this.handleDelete(job.id)}>Delete this entry</button>
-                        </div>
+                       <ExperienceEntry job={job} handleDelete={this.handleDelete} handleResubmit={this.handleResubmit} />
+                       </div>
                     )
                 })}
                 {!addNew
