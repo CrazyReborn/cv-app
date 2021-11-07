@@ -7,8 +7,12 @@ class Education extends React.Component {
         this.state = {
             addNew: false,
             all: [{
-                startYear: '2012', endYear: '2018', uniName: 'Vitebsk', title: 'doc',
-            id: uniqid()}],
+                startYear: '2012', 
+                endYear: '2018', 
+                uniName: 'Vitebsk', 
+                title: 'doc',
+                editing: false,
+                id: uniqid()}],
             currentStartYear: '',
             currentEndYear: '',
             currentUniName: '',
@@ -19,6 +23,7 @@ class Education extends React.Component {
         this.handleAddEducationEntry = this.handleAddEducationEntry.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleEdit = this.handleEdit.bind(this);
     }
 
     handleDelete(id) {
@@ -39,6 +44,46 @@ class Education extends React.Component {
                 id: this.state.currentId,
         });
         console.log(this.state)
+    }
+
+    handleEdit(edu) {
+        this.setState({
+            addNew: this.state.addNew,
+            all: this.state.all,
+            currentStartYear: edu.startYear,
+            currentEndYear: edu.endYear,
+            currentUniName: edu.uniName,
+            currentTitle: edu.title,
+            currentId: this.state.currentId,
+        });
+        const prevAll = this.state.all.slice();
+        const index = prevAll.indexOf(edu);
+        prevAll[index].editing = !edu.editing;
+        this.setState({
+            all: prevAll,
+        });
+    }
+    handleResubmit(e, edu) {
+        e.preventDefault();
+        const prevAll = this.state.all.slice();
+        const index = prevAll.indexOf(edu);
+        const newEntry = {
+            startYear: this.state.currentStartYear,
+            endYear: this.state.currentEndYear,
+            uniName: this.state.currentUniName,
+            title: this.state.currentTitle,
+            editing: !edu.editing,
+            id: this.state.currentId,
+        }
+        prevAll[index] = newEntry
+        this.setState({
+            all: prevAll,
+            currentStartYear: '',
+            currentEndYear: '',
+            currentUniName: '',
+            currentTitle: '',
+            currentId: uniqid(),
+        }, );
     }
 
     handleSubmit(e) {
@@ -69,9 +114,25 @@ class Education extends React.Component {
                 {all.map((edu) => {
                     return (
                         <div key={edu.id}>
+                            {!edu.editing
+                            ?<div>
                             <h3>{edu.uniName}</h3>
                             <p>Title: {edu.title}</p>
                             <p>From {edu.startYear} to {edu.endYear}</p>
+                            <button onClick={() => this.handleEdit(edu)}>Edit this entry</button>
+                            </div>
+                            : <form onSubmit={(e) => this.handleResubmit(e, edu)}>
+                                <label htmlFor="startYear">Start Year</label>
+                                <input onChange={this.handleChange} id="startYear" name="currentStartYear" type="number" min="1960" max="2021" step="1" value={currentStartYear}></input>
+                                <label htmlFor="endYear">End Year</label>
+                                <input onChange={this.handleChange} id="endYear" name="currentEndYear" type="number" min="1960" max="2021" step="1" value={currentEndYear}></input>
+                                <label htmlFor="uniName">School Name</label>
+                                <input onChange={this.handleChange} type="text" name="currentUniName" id="uniName" value={currentUniName}></input>
+                                <label htmlFor="title">Title</label>
+                                <input onChange={this.handleChange} type="text" name="currentTitle" id="title" value={currentTitle}></input>
+                                <input  type="submit"></input>
+                                </form>}
+                            
                             <button onClick={() => this.handleDelete(edu.id)}>Delete this entry</button>
                         </div>
                     )
