@@ -98,9 +98,9 @@ class Experience extends React.Component {
                 })}
                 {!addNew
                 ? <button onClick={this.handleAddEducationEntry}>Add Job</button>
-                : <ExperienceForm handleSubmit={this.handleResubmit} handleChange={this.handleChange} currentStartYear={currentStartYear} 
-                  currentEndYear={currentEndYear} currentCompanyName={currentCompanyName} 
-                  currentJobTitle={currentJobTitle} currentMainTasks={currentMainTasks} />
+                : <ExperienceForm handleSubmit={this.handleResubmit} handleChange={this.handleChange} startYear={currentStartYear} 
+                  endYear={currentEndYear} companyName={currentCompanyName} 
+                  jobTitle={currentJobTitle} mainTasks={currentMainTasks} />
                     }
         </div>
         )
