@@ -1,6 +1,7 @@
 import React from "react";
 import uniqid from "uniqid";
 import ExperienceEntry from "./exp-entry";
+import ExperienceForm from "./exprience-form";
 
 class Experience extends React.Component {
     constructor() {
@@ -97,19 +98,9 @@ class Experience extends React.Component {
                 })}
                 {!addNew
                 ? <button onClick={this.handleAddEducationEntry}>Add Job</button>
-                : <form onSubmit={this.handleSubmit}>
-                    <label htmlFor="startYear">Start Year</label>
-                    <input onChange={this.handleChange} id="startYear" name="currentStartYear" type="text" value={currentStartYear}></input>
-                    <label htmlFor="endYear">End Year</label>
-                    <input onChange={this.handleChange} id="endYear" name="currentEndYear" type="text" value={currentEndYear}></input>
-                    <label htmlFor="companyName">Company Name</label>
-                    <input onChange={this.handleChange} type="text" name="currentCompanyName" id="companyName" value={currentCompanyName}></input>
-                    <label htmlFor="jobTitle">Job Title</label>
-                    <input onChange={this.handleChange} type="text" name="currentJobTitle" id="jobTitle" value={currentJobTitle}></input>
-                    <label htmlFor="mainTasks">Main Tasks</label>
-                    <input onChange={this.handleChange} type="text" name="currentMainTasks" id="mainTasks" value={currentMainTasks}></input>
-                    <input type="submit"></input>
-                    </form>
+                : <ExperienceForm handleSubmit={this.handleResubmit} handleChange={this.handleChange} currentStartYear={currentStartYear} 
+                  currentEndYear={currentEndYear} currentCompanyName={currentCompanyName} 
+                  currentJobTitle={currentJobTitle} currentMainTasks={currentMainTasks} />
                     }
         </div>
         )
