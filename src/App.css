@@ -3,6 +3,10 @@ html{
     padding: 0;
 }
 
+h2 {
+    font-family: 'Crete Round', serif;
+}
+
 .main-container {
     padding: 2%;
     margin: 2% 25%;
@@ -13,6 +17,8 @@ html{
     height: fit-content;
     min-height: 970px;
     color:white;
+    font-family: 'Raleway', sans-serif;
+    font-size: large;
 }
 
 .geranalInfo {
