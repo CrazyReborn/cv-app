@@ -1,12 +1,14 @@
 import React from "react";
+import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class GeneralInfo extends React.Component {
     constructor() {
         super();
         this.state = {
-            firstName: 'defaultName',
-            lastName: 'defaultSecondName',
-            title: 'default title',
+            firstName: 'John',
+            lastName: 'Doe',
+            title: 'Writer',
             email: 'example@gmail.com',
             editing: false,
         }
@@ -37,7 +39,6 @@ class GeneralInfo extends React.Component {
         const {firstName, lastName, title, email, editing} = this.state;
         return (
             <div className="geranalInfo">
-                <h2>GeneralInfo</h2>
                 {editing 
                 ? <form className="geranalInfo" onSubmit={this.handleSubmit}>
                     <label htmlFor="firstName">First Name</label>
@@ -54,7 +55,7 @@ class GeneralInfo extends React.Component {
                 <h2>{firstName + ' ' + lastName}</h2>
                 <p>{title}</p>
                 <p>{email}</p>
-                <button onClick={this.handleEditRequest}>edit</button>
+                <button onClick={this.handleEditRequest}><FontAwesomeIcon icon={faPen} /> Edit</button>
                 </div>}
             </div>
             

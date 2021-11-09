@@ -1,3 +1,5 @@
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import uniqid from "uniqid";
 import ExperienceEntry from "./exp-entry";
@@ -97,7 +99,7 @@ class Experience extends React.Component {
                     )
                 })}
                 {!addNew
-                ? <button onClick={this.handleAddEducationEntry}>Add Job</button>
+                ? <button onClick={this.handleAddEducationEntry}><FontAwesomeIcon icon={faPlus}/> Add Job</button>
                 : <ExperienceForm handleSubmit={this.handleResubmit} handleChange={this.handleChange} startYear={currentStartYear} 
                   endYear={currentEndYear} companyName={currentCompanyName} 
                   jobTitle={currentJobTitle} mainTasks={currentMainTasks} />

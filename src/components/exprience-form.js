@@ -6,7 +6,7 @@ class ExperienceForm extends React.Component {
             jobTitle, mainTasks, handleChange, handleSubmit} = this.props;
 
         return (
-            <form onSubmit={handleSubmit}>
+            <form className="experience" onSubmit={handleSubmit}>
                     <label htmlFor="startYear">Start Year</label>
                     <input onChange={handleChange} id="startYear" name="currentStartYear" type="text" value={startYear}></input>
                     <label htmlFor="endYear">End Year</label>

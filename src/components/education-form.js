@@ -4,7 +4,7 @@ class EdcucationForm extends React.Component {
     render() {
         const { startYear, endYear, uniName, title, handleChange, handleSubmit} = this.props;
         return (
-            <form onSubmit={handleSubmit}>
+            <form className="education" onSubmit={handleSubmit}>
                     <label htmlFor="startYear">Start Year</label>
                     <input onChange={handleChange} id="startYear" name="currentStartYear" type="number" min="1960" max="2021" step="1" value={startYear}></input>
                     <label htmlFor="endYear">End Year</label>

@@ -1,5 +1,7 @@
 import React from "react";
 import uniqid from "uniqid";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 class ExperienceEntry extends React.Component {
     constructor() {
@@ -54,10 +56,10 @@ class ExperienceEntry extends React.Component {
             <p>From {job.startYear} to {job.endYear}</p>
             <p>Position: {job.jobTitle}</p>
             <p>Responsibilities: {job.mainTasks}</p>
-            <button onClick={() => this.handleEdit(job)}>Edit this</button>
-            <button onClick={() => handleDelete(job.id)}>Delete this entry</button>
+            <button onClick={() => this.handleEdit(job)}><FontAwesomeIcon icon={faPen}/> Edit</button>
+            <button onClick={() => handleDelete(job.id)}><FontAwesomeIcon icon={faMinus}/> Delete</button>
             </div>
-            :<form onSubmit={(e) => {handleResubmit(e, job, this.state); this.changeStateToDefault(e)}}>
+            :<form className="experience" onSubmit={(e) => {handleResubmit(e, job, this.state); this.changeStateToDefault(e)}}>
             <label htmlFor="startYear">Start Year</label>
             <input onChange={this.handleChange} id="startYear" name="startYear" type="text" value={startYear}></input>
             <label htmlFor="endYear">End Year</label>

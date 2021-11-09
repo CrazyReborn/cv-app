@@ -35,3 +35,12 @@ html{
     background-color: #FF9D66;
     padding: 1% 2%;
 }
+input[type=text], input[type=number] {
+    width: 30%;
+}
+button {
+    width: max-content;
+}
+input[type=submit] {
+    width: max-content;
+}

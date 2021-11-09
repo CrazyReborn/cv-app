@@ -2,6 +2,8 @@ import React from "react";
 import uniqid from "uniqid";
 import EducationEntry from "./education-entry";
 import EdcucationForm from "./education-form";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 class Education extends React.Component {
     constructor() {
@@ -10,8 +12,8 @@ class Education extends React.Component {
             addNew: false,
             all: [{
                 startYear: '2012', 
-                endYear: '2018', 
-                uniName: 'Vitebsk', 
+                endYear: '2015', 
+                uniName: 'University of Michigan', 
                 title: 'doc',
                 editing: false,
                 id: uniqid()}],
@@ -89,7 +91,7 @@ class Education extends React.Component {
                     )
                 })}
                 {!addNew
-                ? <button onClick={this.handleAddEducationEntry}>Add Education</button>
+                ? <button onClick={this.handleAddEducationEntry}><FontAwesomeIcon icon={faPlus}/>Add New</button>
                 : <EdcucationForm handleSubmit={this.handleSubmit} handleChange={this.handleChange} startYear={currentStartYear}
                   endYear={currentEndYear} uniName={currentUniName} title={currentTitle} />
                     }

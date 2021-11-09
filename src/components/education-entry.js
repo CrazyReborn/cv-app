@@ -1,5 +1,7 @@
 import React from "react";
 import uniqid from "uniqid";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 class EducationEntry extends React.Component {
     constructor() {
@@ -54,10 +56,10 @@ class EducationEntry extends React.Component {
                     <h3>{edu.uniName}</h3>
                     <p>Title: {edu.title}</p>
                     <p>From {edu.startYear} to {edu.endYear}</p>
-                    <button onClick={() => this.handleEdit(edu)}>Edit this entry</button>
-                    <button onClick={() => handleDelete(edu.id)}>Delete this Entry</button>
+                    <button onClick={() => this.handleEdit(edu)}><FontAwesomeIcon icon={faPen}/> Edit</button>
+                    <button onClick={() => handleDelete(edu.id)}><FontAwesomeIcon icon={faMinus}/> Delete</button>
                     </div>
-                    : <form onSubmit={(e) => {handleResubmit(e, edu, this.state); this.changeStateToDefault()}}>
+                    : <form className="education" onSubmit={(e) => {handleResubmit(e, edu, this.state); this.changeStateToDefault()}}>
                         <label htmlFor="startYear">Start Year</label>
                         <input onChange={this.handleChange} id="startYear" name="startYear" type="number" min="1960" max="2021" step="1" value={startYear}></input>
                         <label htmlFor="endYear">End Year</label>
