@@ -14,7 +14,7 @@ class ExperienceEntry extends React.Component {
         }
         this.handleEdit = this.handleEdit.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.handleResubmit = this.handleResubmit.bind(this);
+        this.changeStateToDefault = this.changeStateToDefault.bind(this);
     }
     handleEdit(job) {
         this.setState({
@@ -33,7 +33,7 @@ class ExperienceEntry extends React.Component {
             [name]: value,
         });
     }
-    handleResubmit() {
+    changeStateToDefault() {
         this.setState({
             startYear: '',
             endYear: '',
@@ -57,7 +57,7 @@ class ExperienceEntry extends React.Component {
             <button onClick={() => this.handleEdit(job)}>Edit this</button>
             <button onClick={() => handleDelete(job.id)}>Delete this entry</button>
             </div>
-            :<form onSubmit={(e) => {handleResubmit(e, job, this.state); this.handleResubmit(e)}}>
+            :<form onSubmit={(e) => {handleResubmit(e, job, this.state); this.changeStateToDefault(e)}}>
             <label htmlFor="startYear">Start Year</label>
             <input onChange={this.handleChange} id="startYear" name="startYear" type="text" value={startYear}></input>
             <label htmlFor="endYear">End Year</label>
