@@ -1,66 +1,46 @@
-import React from "react";
+import React, {useState} from "react";
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-class GeneralInfo extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            firstName: 'John',
-            lastName: 'Doe',
-            title: 'Writer',
-            email: 'example@gmail.com',
-            editing: false,
-        }
-        this.handleChange = this.handleChange.bind(this);
-        this.handleEditRequest = this.handleEditRequest.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-    handleChange(e) {
-        const name = e.target.name;
-        const value = e.target.value;
-        this.setState({
-            [name]: value,
-        })
+function GeneralInfo () {
+    
+    const [firstName, setFirstName] = useState('John');
+    const [lastName, setLastName] = useState('Doe');
+    const [title, setTitle] = useState('Writer');
+    const [email, setEmail] = useState('example@gmail.com');
+    const [editing, setEditing] = useState(false)
+
+    function handleEditRequest() {
+        setEditing(!editing);
     }
 
-    handleEditRequest() {
-        this.setState({
-            editing: !this.state.editing
-        });
-    }
-    handleSubmit(e) {
+    function handleSubmit(e) {
         e.preventDefault();
-        this.setState({
-            editing: !this.state.editing
-        });
+        setEditing(!editing);
     }
-    render() {
-        const {firstName, lastName, title, email, editing} = this.state;
         return (
             <div className="geranalInfo">
                 {editing 
-                ? <form className="geranalInfo" onSubmit={this.handleSubmit}>
+                ? <form className="geranalInfo" onSubmit={handleSubmit}>
                     <label htmlFor="firstName">First Name</label>
-                    <input type="text" id="firstName" name="firstName" value={firstName} onChange={this.handleChange}></input>
+                    <input type="text" id="firstName" name="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)}></input>
                     <label htmlFor="lastName">Last Name</label>
-                    <input type="text" id="lastName" name="lastName" value={lastName} onChange={this.handleChange}></input>
+                    <input type="text" id="lastName" name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)}></input>
                     <label htmlFor="title">Job Title</label>
-                    <input type="text" id="title" name="title" value={title} onChange={this.handleChange}></input>
+                    <input type="text" id="title" name="title" value={title} onChange={(e) => setTitle(e.target.value)}></input>
                     <label htmlFor="email">Email</label>
-                    <input type="text" id="email" name="email" value={email} onChange={this.handleChange}></input>
+                    <input type="text" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
                     <input type="submit"></input>
                 </form>
             : <div>
                 <h2>{firstName + ' ' + lastName}</h2>
                 <p>{title}</p>
                 <p>{email}</p>
-                <button onClick={this.handleEditRequest}><FontAwesomeIcon icon={faPen} /> Edit</button>
+                <button onClick={handleEditRequest}><FontAwesomeIcon icon={faPen} /> Edit</button>
                 </div>}
             </div>
             
         )
-    }
 }
 
 export default GeneralInfo
