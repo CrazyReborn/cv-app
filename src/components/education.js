@@ -1,74 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import uniqid from "uniqid";
 import EducationEntry from "./education-entry";
 import EdcucationForm from "./education-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-class Education extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            addNew: false,
-            all: [{
-                startYear: '2012', 
-                endYear: '2015', 
-                uniName: 'University of Michigan', 
-                title: 'doc',
-                editing: false,
-                id: uniqid()}],
-            currentStartYear: '',
-            currentEndYear: '',
-            currentUniName: '',
-            currentTitle: '',
-            currentId: uniqid(),
-        }
-        this.handleDelete = this.handleDelete.bind(this);
-        this.handleAddEducationEntry = this.handleAddEducationEntry.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.handleResubmit = this.handleResubmit.bind(this);
+function Education() {
+    const defaultJob = {
+        startYear: '2012', 
+        endYear: '2015', 
+        uniName: 'University of Michigan', 
+        title: 'doc',
+        editing: false,
+        id: uniqid(),
     }
 
-    handleDelete(id) {
-        this.setState({
-            all: this.state.all.filter(edu => edu.id !== id)
-        });
+
+    const [addNew, setAddNew] = useState(false);
+
+    const [all, setAll] = useState([defaultJob]);
+
+    const [currentStartYear, setCurrentStartYear] = useState('');
+    const [currentEndYear, setCurrentEndYear] = useState('');
+    const [currentUniName, setCurrentUniName] = useState('');
+    const [currentTitle, setCurrentTitle] = useState('');
+    const [currentId, setCurrentId] = useState(uniqid());
+
+    function handleDelete(id) {
+        const newAll = all.filter(edu => edu.id !== id);
+        setAll(newAll);
     }
-    handleAddEducationEntry() {
-        this.setState({
-            addNew: !this.state.addNew,
-        });
+
+    function handleAddEducationEntry() {
+        setAddNew(!addNew);
     }
-    handleSubmit(e) {
+
+    function handleSubmit(e) {
         e.preventDefault();
         const newEntry = {
-            startYear: this.state.currentStartYear,
-            endYear: this.state.currentEndYear,
-            uniName: this.state.currentUniName,
-            title: this.state.currentTitle,
-            id: this.state.currentId,
+            startYear: currentStartYear,
+            endYear: currentEndYear,
+            uniName: currentUniName,
+            title: currentTitle,
+            id: currentId,
         }
-        this.setState({
-            addNew: !this.state.addNew,
-            all: this.state.all.concat(newEntry),
-            currentStartYear: '',
-            currentEndYear: '',
-            currentUniName: '',
-            currentTitle: '',
-            currentId: uniqid(),
-        }, console.log(this.state.all));
+        setAll(all.push(newEntry));
+
+        setCurrentStartYear('');
+        setCurrentEndYear('');
+        setCurrentUniName('');
+        setCurrentTitle('');
+        setCurrentId(uniqid());
     }
-    handleChange(e) {
-        const name = e.target.name;
-        const value = e.target.value;
-        this.setState({
-                [name]: value,
-                id: this.state.currentId,
-        });
-        console.log(this.state)
-    }
-    handleResubmit(e, edu, changedState) {
+
+    function handleResubmit(e, edu, changedState) {
         e.preventDefault();
         const prevAll = this.state.all.slice();
         const index = this.state.all.indexOf(edu);
@@ -77,27 +62,23 @@ class Education extends React.Component {
             all: prevAll,
         })
     }
-    render() {
-        const { all, addNew } = this.state;
-        const {currentStartYear, currentEndYear, currentUniName, currentTitle } = this.state;
         return (
             <div className="education">
                 <h2>Education</h2>
                 {all.map((edu) => {
                     return(
                         <div key={edu.id}>
-                        <EducationEntry edu={edu} handleResubmit={this.handleResubmit} handleDelete={this.handleDelete}/>
+                        <EducationEntry edu={edu} handleResubmit={handleResubmit} handleDelete={handleDelete}/>
                         </div>
                     )
                 })}
                 {!addNew
-                ? <button onClick={this.handleAddEducationEntry}><FontAwesomeIcon icon={faPlus}/>Add New</button>
-                : <EdcucationForm handleSubmit={this.handleSubmit} handleChange={this.handleChange} startYear={currentStartYear}
+                ? <button onClick={handleAddEducationEntry}><FontAwesomeIcon icon={faPlus}/>Add New</button>
+                : <EdcucationForm handleSubmit={handleSubmit} startYear={currentStartYear}
                   endYear={currentEndYear} uniName={currentUniName} title={currentTitle} />
                     }
         </div>
         )
-    }
 }
 
 export default Education
