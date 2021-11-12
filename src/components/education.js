@@ -44,23 +44,23 @@ function Education() {
             title: currentTitle,
             id: currentId,
         }
-        setAll(all.push(newEntry));
+        setAll(all.concat(newEntry));
 
         setCurrentStartYear('');
         setCurrentEndYear('');
         setCurrentUniName('');
         setCurrentTitle('');
         setCurrentId(uniqid());
+
+        setAddNew(false);
     }
 
-    function handleResubmit(e, edu, changedState) {
+    function handleResubmit(e, edu, newEdu) {
         e.preventDefault();
-        const prevAll = this.state.all.slice();
-        const index = this.state.all.indexOf(edu);
-        prevAll[index] = changedState;
-        this.setState({
-            all: prevAll,
-        })
+        const prevAll = all.slice();
+        const index = all.indexOf(edu);
+        prevAll[index] = newEdu;
+        setAll(prevAll);
     }
         return (
             <div className="education">
@@ -74,8 +74,12 @@ function Education() {
                 })}
                 {!addNew
                 ? <button onClick={handleAddEducationEntry}><FontAwesomeIcon icon={faPlus}/>Add New</button>
-                : <EdcucationForm handleSubmit={handleSubmit} startYear={currentStartYear}
-                  endYear={currentEndYear} uniName={currentUniName} title={currentTitle} />
+                : <EdcucationForm 
+                handleSubmit={handleSubmit} 
+                startYear={currentStartYear} setCurrentStartYear={setCurrentStartYear}
+                endYear={currentEndYear} setCurrentEndYear={setCurrentEndYear}
+                uniName={currentUniName} setCurrentUniName={setCurrentUniName}
+                title={currentTitle} setCurrentTitle={setCurrentTitle} />
                     }
         </div>
         )

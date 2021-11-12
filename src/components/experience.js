@@ -52,7 +52,6 @@ class Experience extends React.Component {
                 [name]: value,
                 id: this.state.currentId,
         });
-        console.log(this.state)
     }
 
     handleSubmit(e) {
@@ -74,7 +73,7 @@ class Experience extends React.Component {
             currentJobTitle: '',
             currentMainTasks: '',
             currentId: uniqid(),
-        }, console.log(this.state.all));
+        });
     }
     handleResubmit(e, job, changedState) {
         e.preventDefault();

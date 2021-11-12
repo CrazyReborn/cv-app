@@ -16,17 +16,17 @@ function ExperienceEntry (props) {
 
     const [newEdu, setNewEdu] = useState({});
     
-    useEffect(() => {
-        setNewEdu ({
-            startYear,
-            endYear,
-            jobTitle,
-            mainTasks,
-            companyName,
-            editing,
-            id,
-        })
-    }, [newEdu])
+    function createNewEduEntry(){
+            setNewEdu ({
+                startYear,
+                endYear,
+                jobTitle,
+                mainTasks,
+                companyName,
+                editing,
+                id,
+            })
+    }
 
     function handleEdit(job) {
         setStartYear(job.startYear);
@@ -60,7 +60,7 @@ function ExperienceEntry (props) {
             <button onClick={() => handleEdit(job)}><FontAwesomeIcon icon={faPen}/> Edit</button>
             <button onClick={() => handleDelete(job.id)}><FontAwesomeIcon icon={faMinus}/> Delete</button>
             </div>
-            :<form className="experience" onSubmit={(e) => {handleResubmit(e, job, newEdu); changeStateToDefault()}}>
+            :<form className="experience" onSubmit={(e) => {createNewEduEntry(); handleResubmit(e, job, newEdu); changeStateToDefault()}}>
             <label htmlFor="startYear">Start Year</label>
             <input onChange={(e) => setStartYear(e.target.value)} id="startYear" name="startYear" type="text" value={startYear}></input>
             <label htmlFor="endYear">End Year</label>

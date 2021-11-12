@@ -19,7 +19,7 @@ class EducationEntry extends React.Component {
         this.handleEdit = this.handleEdit.bind(this);
     }
     handleEdit(edu) {
-        console.log(edu, this.state)
+        
         this.setState({
             startYear: edu.startYear,
             endYear: edu.endYear,
@@ -27,7 +27,7 @@ class EducationEntry extends React.Component {
             title: edu.title,
             editing: !this.state.editing,
             id: edu.id
-        }, console.log(this.state));
+        },);
     }
     handleChange(e) {
         const name = e.target.name;

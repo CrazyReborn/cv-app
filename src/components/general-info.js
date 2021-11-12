@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function GeneralInfo () {
+function GeneralInfo (props) {
     
     const [firstName, setFirstName] = useState('John');
     const [lastName, setLastName] = useState('Doe');
