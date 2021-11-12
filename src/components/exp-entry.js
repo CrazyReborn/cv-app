@@ -1,82 +1,81 @@
-import React from "react";
+import React, { useState } from "react";
 import uniqid from "uniqid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faMinus } from '@fortawesome/free-solid-svg-icons';
+import { useEffect } from "react/cjs/react.development";
 
-class ExperienceEntry extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            startYear: '',
-            endYear: '',
-            jobTitle: '',
-            mainTasks: '',
-            editing: false,
-            id: uniqid(),
-        }
-        this.handleEdit = this.handleEdit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.changeStateToDefault = this.changeStateToDefault.bind(this);
+function ExperienceEntry (props) {
+
+    const [startYear, setStartYear] = useState('');
+    const [endYear, setEndYear] = useState('');
+    const [jobTitle, setJobTitle] = useState('');
+    const [mainTasks, setMainTasks] = useState('');
+    const [companyName, setCompanyName] = useState('');
+    const [editing, setEditing] = useState(false);
+    const [id, setId] = useState(uniqid());
+
+    const [newEdu, setNewEdu] = useState({});
+    
+    useEffect(() => {
+        setNewEdu ({
+            startYear,
+            endYear,
+            jobTitle,
+            mainTasks,
+            companyName,
+            editing,
+            id,
+        })
+    }, [newEdu])
+
+    function handleEdit(job) {
+        setStartYear(job.startYear);
+        setEndYear(job.endYear);
+        setJobTitle(job.jobTitle);
+        setMainTasks(job.mainTask);
+        setEditing(!editing);
+        setId(job.id);
     }
-    handleEdit(job) {
-        this.setState({
-            startYear: job.startYear,
-            endYear: job.endYear,
-            jobTitle: job.jobTitle,
-            mainTasks: job.mainTasks,
-            editing: !this.state.editing,
-            id: job.id
-        });
+
+    function changeStateToDefault() {
+        setStartYear('');
+        setEndYear('');
+        setJobTitle('');
+        setMainTasks('');
+        setCompanyName('');
+        setEditing(false);
+        setId(uniqid());
     }
-    handleChange(e) {
-        const name = e.target.name;
-        const value = e.target.value;
-        this.setState({
-            [name]: value,
-        });
-    }
-    changeStateToDefault() {
-        this.setState({
-            startYear: '',
-            endYear: '',
-            jobTitle: '',
-            mainTasks: '',
-            editing: false,
-            id: uniqid(),
-        });
-    }
-    render() {
-        const { job, handleDelete, handleResubmit } = this.props;
-        const { startYear, endYear, companyName, jobTitle, mainTasks} = this.state;
+
+    const { job, handleDelete, handleResubmit } = props;
+
         return (
            <div>
-            {!this.state.editing
+            {!editing
             ? <div>
             <h3>{job.companyName}</h3>
             <p>From {job.startYear} to {job.endYear}</p>
             <p>Position: {job.jobTitle}</p>
             <p>Responsibilities: {job.mainTasks}</p>
-            <button onClick={() => this.handleEdit(job)}><FontAwesomeIcon icon={faPen}/> Edit</button>
+            <button onClick={() => handleEdit(job)}><FontAwesomeIcon icon={faPen}/> Edit</button>
             <button onClick={() => handleDelete(job.id)}><FontAwesomeIcon icon={faMinus}/> Delete</button>
             </div>
-            :<form className="experience" onSubmit={(e) => {handleResubmit(e, job, this.state); this.changeStateToDefault(e)}}>
+            :<form className="experience" onSubmit={(e) => {handleResubmit(e, job, newEdu); changeStateToDefault()}}>
             <label htmlFor="startYear">Start Year</label>
-            <input onChange={this.handleChange} id="startYear" name="startYear" type="text" value={startYear}></input>
+            <input onChange={(e) => setStartYear(e.target.value)} id="startYear" name="startYear" type="text" value={startYear}></input>
             <label htmlFor="endYear">End Year</label>
-            <input onChange={this.handleChange} id="endYear" name="endYear" type="text" value={endYear}></input>
+            <input onChange={(e) => setEndYear(e.target.value)} id="endYear" name="endYear" type="text" value={endYear}></input>
             <label htmlFor="companyName">Company Name</label>
-            <input onChange={this.handleChange} type="text" name="companyName" id="companyName" value={companyName}></input>
+            <input onChange={(e) => setCompanyName(e.target.value)} type="text" name="companyName" id="companyName" value={companyName}></input>
             <label htmlFor="jobTitle">Job Title</label>
-            <input onChange={this.handleChange} type="text" name="jobTitle" id="jobTitle" value={jobTitle}></input>
+            <input onChange={(e) => setJobTitle(e.target.value)} type="text" name="jobTitle" id="jobTitle" value={jobTitle}></input>
             <label htmlFor="mainTasks">Main Tasks</label>
-            <input onChange={this.handleChange} type="text" name="mainTasks" id="mainTasks" value={mainTasks}></input>
+            <input onChange={(e) => setMainTasks(e.target.value)} type="text" name="mainTasks" id="mainTasks" value={mainTasks}></input>
             <input type="submit"></input>
             </form>
             }
             </div>
         )
     }
-}
-
 
 export default ExperienceEntry
