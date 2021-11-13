@@ -1,111 +1,85 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, {useState} from "react";
 import uniqid from "uniqid";
 import ExperienceEntry from "./exp-entry";
 import ExperienceForm from "./exprience-form";
 
-class Experience extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            addNew: false,
-            all: [{
-                startYear: '2020',
-                endYear: '2021',
-                companyName: 'Sprite',
-                jobTitle: 'sommelier',
-                mainTasks: 'Drinking sprite',
-                id: uniqid(),
-            }],
-            currentStartYear: '',
-            currentEndYear: '',
-            currentCompanyName: '',
-            currentJobTitle: '',
-            currentMainTasks: '',
-            currentId: uniqid(),
-        }
-        this.handleDelete = this.handleDelete.bind(this);
-        this.handleAddEducationEntry = this.handleAddEducationEntry.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleResubmit = this.handleResubmit.bind(this);
-        this.handleResubmit = this.handleResubmit.bind(this);
+function Experience () {  
+    const defaultJob = {
+        startYear: '2012', 
+        endYear: '2015', 
+        uniName: 'University of Michigan', 
+        title: 'doc',
+        editing: false,
+        id: uniqid(),
     }
 
-    handleDelete(id) {
-        this.setState({
-            all: this.state.all.filter(edu => edu.id !== id)
-        });
+    const [addNew, setAddNew] = useState(false);
+
+    const [all, setAll] = useState([defaultJob]);
+
+    const [currentStartYear, setCurrentStartYear] = useState('');
+    const [currentEndYear, setCurrentEndYear] = useState('');
+    const [currentCompanyName, setCurrentCompanyName] = useState('');
+    const [currentJobTitle, setCurrentJobTitle] = useState('');
+    const [currentMainTasks, setCurrentMainTasks] = useState('');
+    const [currentId, setCurrentId] = useState(uniqid());
+
+
+    function handleDelete(id) {
+        const newAll = all.filter(edu => edu.id !== id);
+        setAll(newAll);
     }
 
-    handleAddEducationEntry() {
-        this.setState({
-            addNew: !this.state.addNew,
-        });
+    function handleAddEducationEntry() {
+        setAddNew(!addNew);
     }
 
-    handleChange(e) {
-        const name = e.target.name;
-        const value = e.target.value;
-        this.setState({
-                [name]: value,
-                id: this.state.currentId,
-        });
-    }
-
-    handleSubmit(e) {
+    function handleSubmit(e) {
         e.preventDefault();
         const newEntry = {
-            startYear: this.state.currentStartYear,
-            endYear: this.state.currentEndYear,
-            companyName: this.state.currentCompanyName,
-            jobTitle: this.state.currentJobTitle,
-            mainTasks: this.state.currentMainTasks,
-            id: this.state.currentId,
+            startYear: currentStartYear,
+            endYear: currentEndYear,
+            companyName: currentCompanyName,
+            jobTitle: currentJobTitle,
+            mainTasks: currentMainTasks,
+            id: currentId,
         }
-        this.setState({
-            addNew: !this.state.addNew,
-            all: this.state.all.concat(newEntry),
-            currentStartYear: '',
-            currentEndYear: '',
-            currentCompanyName: '',
-            currentJobTitle: '',
-            currentMainTasks: '',
-            currentId: uniqid(),
-        });
+        setAddNew(!addNew);
+        setAll(all.concat(newEntry));
+        setCurrentStartYear('');
+        setCurrentEndYear('');
+        setCurrentCompanyName('');
+        setCurrentJobTitle('');
+        setCurrentMainTasks('');
+        setCurrentId(uniqid());
     }
-    handleResubmit(e, job, changedState) {
+    function handleResubmit(e, job, newJob) {
         e.preventDefault();
-        const prevAll = this.state.all.slice();
-        const index = this.state.all.indexOf(job);
-        prevAll[index] = changedState;
-        this.setState({
-            all: prevAll,
-        });
+        const prevAll = all.slice();
+        const index = all.indexOf(job);
+        prevAll[index] = newJob;
+        setAll(prevAll);
     }
-    render() {
-        const { all, addNew } = this.state;
-        const {currentStartYear, currentEndYear, currentCompanyName, currentJobTitle, currentMainTasks } = this.state;
         return (
             <div className="experience">
                 <h2>Work Experience</h2>
                 {all.map((job) => {
                     return (
                         <div key={job.id}>
-                       <ExperienceEntry job={job} handleDelete={this.handleDelete} handleResubmit={this.handleResubmit} />
+                       <ExperienceEntry job={job} handleDelete={handleDelete} handleResubmit={handleResubmit} />
                        </div>
                     )
                 })}
                 {!addNew
-                ? <button onClick={this.handleAddEducationEntry}><FontAwesomeIcon icon={faPlus}/> Add Job</button>
-                : <ExperienceForm handleSubmit={this.handleResubmit} handleChange={this.handleChange} startYear={currentStartYear} 
+                ? <button onClick={handleAddEducationEntry}><FontAwesomeIcon icon={faPlus}/> Add Job</button>
+                : <ExperienceForm handleSubmit={handleResubmit} startYear={currentStartYear} 
                   endYear={currentEndYear} companyName={currentCompanyName} 
                   jobTitle={currentJobTitle} mainTasks={currentMainTasks} />
                     }
         </div>
         )
-    }
 }
 
 export default Experience
