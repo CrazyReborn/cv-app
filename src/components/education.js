@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 function Education() {
-    const defaultJob = {
+    const defaultEdu = {
         startYear: '2012', 
         endYear: '2015', 
         uniName: 'University of Michigan', 
@@ -18,7 +18,7 @@ function Education() {
 
     const [addNew, setAddNew] = useState(false);
 
-    const [all, setAll] = useState([defaultJob]);
+    const [all, setAll] = useState([defaultEdu]);
 
     const [currentStartYear, setCurrentStartYear] = useState('');
     const [currentEndYear, setCurrentEndYear] = useState('');
