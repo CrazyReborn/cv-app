@@ -7,11 +7,11 @@ import ExperienceForm from "./exprience-form";
 
 function Experience () {  
     const defaultJob = {
-        startYear: '2012', 
-        endYear: '2015', 
-        uniName: 'University of Michigan', 
-        title: 'doc',
-        editing: false,
+        startYear: '2020',
+        endYear: '2021',
+        companyName: 'Sprite',
+        jobTitle: 'sommelier',
+        mainTasks: 'Drinking sprite',
         id: uniqid(),
     }
 
@@ -74,12 +74,12 @@ function Experience () {
                 })}
                 {!addNew
                 ? <button onClick={handleAddEducationEntry}><FontAwesomeIcon icon={faPlus}/> Add Job</button>
-                : <ExperienceForm handleSubmit={handleResubmit} 
+                : <ExperienceForm handleSubmit={handleSubmit} 
                 startYear={currentStartYear} setCurrentStartYear={setCurrentStartYear}
                 endYear={currentEndYear} setCurrentEndYear={setCurrentEndYear}
                 companyName={currentCompanyName} setCurrentCompanyName={setCurrentCompanyName}
                 jobTitle={currentJobTitle} setCurrentJobTitle={setCurrentJobTitle}
-                mainTasks={currentMainTasks} setCurrentMainTasks />
+                mainTasks={currentMainTasks} setCurrentMainTasks={setCurrentMainTasks} />
                     }
         </div>
         )

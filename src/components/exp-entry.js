@@ -30,7 +30,8 @@ function ExperienceEntry (props) {
         setStartYear(job.startYear);
         setEndYear(job.endYear);
         setJobTitle(job.jobTitle);
-        setMainTasks(job.mainTask);
+        setCompanyName(job.companyName);
+        setMainTasks(job.mainTasks);
         setEditing(!editing);
         setId(job.id);
     }
