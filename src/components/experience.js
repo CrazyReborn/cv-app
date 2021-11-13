@@ -74,9 +74,12 @@ function Experience () {
                 })}
                 {!addNew
                 ? <button onClick={handleAddEducationEntry}><FontAwesomeIcon icon={faPlus}/> Add Job</button>
-                : <ExperienceForm handleSubmit={handleResubmit} startYear={currentStartYear} 
-                  endYear={currentEndYear} companyName={currentCompanyName} 
-                  jobTitle={currentJobTitle} mainTasks={currentMainTasks} />
+                : <ExperienceForm handleSubmit={handleResubmit} 
+                startYear={currentStartYear} setCurrentStartYear={setCurrentStartYear}
+                endYear={currentEndYear} setCurrentEndYear={setCurrentEndYear}
+                companyName={currentCompanyName} setCurrentCompanyName={setCurrentCompanyName}
+                jobTitle={currentJobTitle} setCurrentJobTitle={setCurrentJobTitle}
+                mainTasks={currentMainTasks} setCurrentMainTasks />
                     }
         </div>
         )

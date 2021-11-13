@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import uniqid from "uniqid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faMinus } from '@fortawesome/free-solid-svg-icons';
-import { useEffect } from "react/cjs/react.development";
-
 function ExperienceEntry (props) {
 
     const [startYear, setStartYear] = useState('');
