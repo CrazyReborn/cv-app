@@ -1,3 +1,10 @@
+# About this app
+This is a CV app that was originally build with React class components and then refactored into using functional components.
+Has 3 categories:
+1. General info;
+2. Education;
+3. Experience;
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
